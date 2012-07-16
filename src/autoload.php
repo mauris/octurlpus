@@ -11,8 +11,8 @@
  * @since 1.0
  */
 
+set_include_path(get_include_path() . PATH_SEPARATOR .__DIR__);
 spl_autoload_register(function($class) {
-  
     $class = ltrim($class, '\\');
     $fileName  = '';
     $namespace = '';
@@ -22,6 +22,5 @@ spl_autoload_register(function($class) {
         $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
     }
     $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-
     require $fileName;
 });

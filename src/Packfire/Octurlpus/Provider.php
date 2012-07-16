@@ -13,10 +13,10 @@ namespace Packfire\Octurlpus;
  * @package Packfire\Octurlpus
  * @since 1.0
  */
-abstract class Driver {
+abstract class Provider {
     
-    public function match($url);
+    public abstract function peek($url);
     
-    public function data($url);
+    public abstract function fetch();
     
 }

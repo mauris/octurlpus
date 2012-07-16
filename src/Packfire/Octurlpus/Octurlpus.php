@@ -15,8 +15,39 @@ namespace Packfire\Octurlpus;
  */
 class Octurlpus {
     
-    public function expand($url){
-        
+    private $providers = array(
+        'YouTube'
+    );
+    
+    public function __construct(){
+        $this->loadProviders();
+    }
+    
+    private function loadProviders(){
+        $providers = array();
+        foreach($this->providers as $provider){
+            $name = 'Packfire\\Octurlpus\\Drivers\\' . $provider . '\\Provider';
+            $providers[$provider] = new $name();
+        }
+        $this->providers = $providers;
+    }
+    
+    public function type($url){
+        foreach($this->providers as $name => $provider){
+            /* @var Packfire\Octurlpus\Provider $provider */
+            if($provider->peek($url)){
+                return $name;
+            }
+        }
+    }
+    
+    public function request($url){
+        foreach($this->providers as $provider){
+            /* @var Packfire\Octurlpus\Provider $provider */
+            if($provider->peek($url)){
+                return $provider->fetch();
+            }
+        }
     }
     
 }

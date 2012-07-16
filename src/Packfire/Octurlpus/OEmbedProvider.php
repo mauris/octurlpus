@@ -21,11 +21,11 @@ abstract class OEmbedProvider extends Provider {
     
     public function peek($url){
         $this->url = $url;
-        return self::match($url);
+        return static::match($url);
     }
     
     public function fetch(){
-        $url = self::oembed() . '?url=' . urlencode($this->url) . '&format=json';
+        $url = static::oembed() . '?url=' . urlencode($this->url) . '&format=json';
         $data = self::getData($url);
         return json_decode($data, true);
     }
