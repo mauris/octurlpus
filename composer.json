@@ -1,0 +1,17 @@
+{
+    "name": "packfire/octurlpus",
+    "type": "library",
+    "description": "Octurlpus - making URLs meaningful to code",
+    "keywords": ["url", "parser"],
+    "license": "New BSD License",
+    "authors": [
+        {
+            "name": "Sam-Mauris Yong",
+            "email": "mauris@hotmail.sg",
+            "homepage": "http://mauris.sg/"
+        }
+    ],
+    "require":{
+        "php": ">=5.3"
+    }
+}
