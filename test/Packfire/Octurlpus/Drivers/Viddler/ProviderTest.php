@@ -1,8 +1,8 @@
 <?php
 
-namespace Packfire\Octurlpus\Drivers\YouTube;
+namespace Packfire\Octurlpus\Drivers\Viddler;
 
-use Packfire\Octurlpus\Drivers\Youtube\Provider;
+use Packfire\Octurlpus\Drivers\Viddler\Provider;
 
 /**
  * Test class for Provider.
@@ -11,7 +11,7 @@ use Packfire\Octurlpus\Drivers\Youtube\Provider;
 class ProviderTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @var Packfire\Octurlpus\Drivers\YouTube\Provider
+     * @var Packfire\Octurlpus\Drivers\Viddler\Provider
      */
     protected $object;
 
@@ -35,20 +35,22 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::peek
      */
     public function testProviderPeek(){
-        $this->assertTrue($this->object->peek('http://www.youtube.com/watch?feature=test&v=LBTdJHkAr5A'));
-        $this->assertTrue($this->object->peek('http://www.youtu.be/LBTdJHkAr5A'));
-        $this->assertFalse($this->object->peek('http://www.youtube.com/really?LBTdJHkAr5A'));
-        $this->assertFalse($this->object->peek('http://www.youtube.com/watch?feature=test&a=LBTdJHkAr5A'));
+        $this->assertTrue($this->object->peek('http://www.viddler.com/v/1646c55'));
+        $this->assertTrue($this->object->peek('http://www.viddler.com/explore/cdevroe/videos/424/'));
+        $this->assertTrue($this->object->peek('http://viddler.com/v/1646c55'));
+        $this->assertTrue($this->object->peek('http://viddler.com/explore/cdevroe/videos/424/'));
+        $this->assertFalse($this->object->peek('http://viddier.com/really?LBTdJHkAr5A'));
+        $this->assertFalse($this->object->peek('http://www.youtube.com/'));
     }
     
     /**
      * @covers Provider::peek
      */
     public function testProviderFetch(){
-        $this->object->peek('http://www.youtube.com/watch?feature=test&v=LBTdJHkAr5A');
+        $this->object->peek('http://www.viddler.com/v/1646c55');
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
-        $this->assertEquals('YouTube', $data['provider_name']);
+        $this->assertEquals('Viddler', $data['provider_name']);
         $this->assertEquals('1.0', $data['version']);
         $this->assertEquals('video', $data['type']);
     }
