@@ -17,7 +17,7 @@ use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
  */
 class Provider extends OcturlpusProvider {
     
-    protected static function match($url){
+    protected function match($url){
         $urlParts = parse_url($url);
         if(array_key_exists('host', $urlParts)
                 && array_key_exists('path', $urlParts)){
@@ -41,7 +41,7 @@ class Provider extends OcturlpusProvider {
         return false;
     }
     
-    protected static function oembed(){
+    protected function oembed(){
         return 'http://www.youtube.com/oembed';
     }
     

@@ -21,11 +21,11 @@ abstract class OEmbedProvider extends Provider {
     
     public function peek($url){
         $this->url = $url;
-        return static::match($url);
+        return $this->match($url);
     }
     
     public function fetch(){
-        $url = static::oembed() . '?url=' . urlencode($this->url) . '&format=json';
+        $url = $this->oembed() . '?url=' . urlencode($this->url) . '&format=json';
         $data = self::getData($url);
         return json_decode($data, true);
     }
@@ -43,8 +43,8 @@ abstract class OEmbedProvider extends Provider {
         return $data;
     }
     
-    protected abstract static function match($url);
+    protected abstract function match($url);
     
-    protected abstract static function oembed();
+    protected abstract function oembed();
     
 }
