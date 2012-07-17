@@ -9,7 +9,7 @@ namespace Packfire\Octurlpus\Drivers\WordPress;
 class ProviderTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @var Packfire\Octurlpus\Drivers\Viddler\Provider
+     * @var Packfire\Octurlpus\Drivers\Flickr\Provider
      */
     protected $object;
 

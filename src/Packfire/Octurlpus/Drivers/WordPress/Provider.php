@@ -7,7 +7,7 @@ use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
 /**
  * Provider class
  * 
- * Providing Driver for Viddler URLs
+ * Providing Driver for WordPress Post URLs
  *
  * @author Sam-Mauris Yong / mauris@hotmail.sg
  * @copyright Copyright (c) 2010-2012, Sam-Mauris Yong
