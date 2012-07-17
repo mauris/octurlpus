@@ -2,7 +2,7 @@
 
 namespace Packfire\Octurlpus\Drivers\YouTube;
 
-use Packfire\Octurlpus\Drivers\Youtube\Provider;
+use Packfire\Octurlpus\Drivers\YouTube\Provider;
 
 /**
  * Test class for Provider.
