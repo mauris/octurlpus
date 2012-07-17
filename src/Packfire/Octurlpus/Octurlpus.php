@@ -16,7 +16,8 @@ namespace Packfire\Octurlpus;
 class Octurlpus {
     
     private $providers = array(
-        'YouTube'
+        'YouTube',
+        'Viddler'
     );
     
     public function __construct(){
