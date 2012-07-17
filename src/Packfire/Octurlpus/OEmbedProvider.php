@@ -17,19 +17,45 @@ use Packfire\Octurlpus\Provider;
  */
 abstract class OEmbedProvider extends Provider {
     
+    /**
+     * The current working URL
+     * @var string
+     * @since 1.0
+     */
     protected $url;
     
+    /**
+     * Peek into the URL to see if the Provider can handle this URL.
+     * 
+     * This method will also set the current working URL to the URL entered.
+     * 
+     * @param string $url The URL to handle
+     * @return boolean Returns true if the Provider can handle and fetch data
+     *          for the URL, and false otherwise.
+     * @since 1.0
+     */
     public function peek($url){
         $this->url = $url;
         return $this->match($url);
     }
     
+    /**
+     * Fetch data from the current working URL
+     * @return array Returns the array containing the data
+     * @since 1.0
+     */
     public function fetch(){
         $url = $this->oembed() . '?url=' . urlencode($this->url) . '&format=json&for=packfire/octurlpus';
         $data = self::getData($url);
         return json_decode($data, true);
     }
     
+    /**
+     * Get the string data from a URL
+     * @param string $url The URL to get data from
+     * @return string Returns the string data retrieved
+     * @since 1.0
+     */
     private static function getData($url){
         $ch = curl_init();
         if(substr($url,0,8) == 'https://'){
@@ -44,8 +70,19 @@ abstract class OEmbedProvider extends Provider {
         return $data;
     }
     
+    /**
+     * Check if the URL matches the oEmbed provider's pattern
+     * @param string $url The URL to check
+     * @return boolean Returns true if the pattern matches, false otherwise.
+     * @since 1.0
+     */
     protected abstract function match($url);
     
+    /**
+     * Get the oEmbed provider endpoint
+     * @return string Returns the endpoint URL
+     * @since 1.0
+     */
     protected abstract function oembed();
     
 }
