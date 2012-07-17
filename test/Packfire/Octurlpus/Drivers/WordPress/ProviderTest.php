@@ -1,6 +1,6 @@
 <?php
 
-namespace Packfire\Octurlpus\Drivers\Viddler;
+namespace Packfire\Octurlpus\Drivers\WordPress;
 
 /**
  * Test class for Provider.
@@ -33,24 +33,23 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::peek
      */
     public function testProviderPeek(){
-        $this->assertTrue($this->object->peek('http://www.viddler.com/v/1646c55'));
-        $this->assertTrue($this->object->peek('http://www.viddler.com/explore/cdevroe/videos/424/'));
-        $this->assertTrue($this->object->peek('http://viddler.com/v/1646c55'));
-        $this->assertTrue($this->object->peek('http://viddler.com/explore/cdevroe/videos/424/'));
-        $this->assertFalse($this->object->peek('http://viddier.com/really?LBTdJHkAr5A'));
-        $this->assertFalse($this->object->peek('http://www.youtube.com/'));
+        $this->assertTrue($this->object->peek('http://en.blog.wordpress.com/2012/07/12/around-the-carousel-again/'));
+        $this->assertTrue($this->object->peek('http://en.blog.wordpress.com/2012/06/21/with-wordads-my-nintendo-news-turns-hobby-into-budding-business/'));
+        $this->assertTrue($this->object->peek('http://findinggenuinejoy.wordpress.com/2012/07/10/next-stop-the-olympics/'));
+        $this->assertFalse($this->object->peek('http://wordpress.com'));
+        $this->assertFalse($this->object->peek('http://www.wordpress.com/'));
     }
     
     /**
      * @covers Provider::peek
      */
     public function testProviderFetch(){
-        $this->object->peek('http://www.viddler.com/v/1646c55');
+        $this->object->peek('http://en.blog.wordpress.com/2012/07/12/around-the-carousel-again/');
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
-        $this->assertEquals('Viddler', $data['provider_name']);
+        $this->assertEquals('WordPress.com News', $data['provider_name']);
         $this->assertEquals('1.0', $data['version']);
-        $this->assertEquals('video', $data['type']);
+        $this->assertEquals('link', $data['type']);
     }
 
 }
