@@ -15,15 +15,31 @@ namespace Packfire\Octurlpus;
  */
 class Octurlpus {
     
+    /**
+     * Service providers
+     * @var array
+     * @since 1.0
+     */
     private $providers = array(
         'YouTube',
-        'Viddler'
+        'Viddler',
+        'WordPress',
+        'SpeakerDeck',
+        'Vimeo'
     );
     
+    /**
+     * Create a new Octurlpus instance
+     * @since 1.0
+     */
     public function __construct(){
         $this->loadProviders();
     }
     
+    /**
+     * Load the service providers
+     * @since 1.0
+     */
     private function loadProviders(){
         $providers = array();
         foreach($this->providers as $provider){
@@ -33,6 +49,13 @@ class Octurlpus {
         $this->providers = $providers;
     }
     
+    /**
+     * Get the provider name for the URL
+     * @param string $url The URL to check
+     * @return string Returns the provider name if the URL matches, or NULL if
+     *          no suitable provider can handle the URL.
+     * @since 1.0
+     */
     public function type($url){
         foreach($this->providers as $name => $provider){
             /* @var Packfire\Octurlpus\Provider $provider */
@@ -42,6 +65,13 @@ class Octurlpus {
         }
     }
     
+    /**
+     * Request additional data about the URL
+     * @param string $url The URL to retrieve more data
+     * @return array Returns the data retrieved or NULL if no handler can handle
+     *      the URL.
+     * @since 1.0
+     */
     public function request($url){
         foreach($this->providers as $provider){
             /* @var Packfire\Octurlpus\Provider $provider */
