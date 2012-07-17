@@ -18,7 +18,7 @@ use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
 class Provider extends OcturlpusProvider {
     
     protected function match($url){
-        return (bool)preg_match('`^https*://([\S\.]*)speakerdeck\.com/\S+$`is', $url);
+        return (bool)preg_match('`^https*://([\S]+\.)*speakerdeck\.com/\S+$`is', $url);
     }
     
     protected function oembed(){
