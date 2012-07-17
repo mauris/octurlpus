@@ -17,11 +17,11 @@ use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
  */
 class Provider extends OcturlpusProvider {
     
-    protected static function match($url){
+    protected function match($url){
         return (bool)preg_match('`^http://([\S.]*)viddler.com/\S+$`is', $url);
     }
     
-    protected static function oembed(){
+    protected function oembed(){
         return 'http://tools.viddler.com/services/oembed/';
     }
     
