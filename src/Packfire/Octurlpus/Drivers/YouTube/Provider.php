@@ -5,9 +5,9 @@ namespace Packfire\Octurlpus\Drivers\YouTube;
 use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
 
 /**
- * Driver class
+ * Provider class
  * 
- * Driver for YouTube URLs
+ * Providing Driver for YouTube URLs
  *
  * @author Sam-Mauris Yong / mauris@hotmail.sg
  * @copyright Copyright (c) 2010-2012, Sam-Mauris Yong
