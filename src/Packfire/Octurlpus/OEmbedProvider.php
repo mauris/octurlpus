@@ -25,7 +25,7 @@ abstract class OEmbedProvider extends Provider {
     }
     
     public function fetch(){
-        $url = $this->oembed() . '?url=' . urlencode($this->url) . '&format=json';
+        $url = $this->oembed() . '?url=' . urlencode($this->url) . '&format=json&for=packfire/octurlpus';
         $data = self::getData($url);
         return json_decode($data, true);
     }
@@ -33,8 +33,7 @@ abstract class OEmbedProvider extends Provider {
     private static function getData($url){
         $ch = curl_init();
         if(substr($url,0,8) == 'https://'){
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);     
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); 
+            curl_setopt ($ch, CURLOPT_CAINFO, __DIR__ . DIRECTORY_SEPARATOR . 'cacert.pem');
         }
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
