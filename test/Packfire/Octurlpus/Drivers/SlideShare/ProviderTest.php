@@ -1,6 +1,6 @@
 <?php
 
-namespace Packfire\Octurlpus\Drivers\Flickr;
+namespace Packfire\Octurlpus\Drivers\SlideShare;
 
 /**
  * Test class for Provider.
@@ -9,7 +9,7 @@ namespace Packfire\Octurlpus\Drivers\Flickr;
 class ProviderTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @var Packfire\Octurlpus\Drivers\Flickr\Provider
+     * @var Packfire\Octurlpus\Drivers\SlideShare\Provider
      */
     protected $object;
 
@@ -34,11 +34,13 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      */
     public function testProviderPeek(){
         $urls = array(
-            'http://flickr.com/photos/bees/2362225867/' => true,
-            'http://www.flickr.com/photos/bees/2362225867/' => true,
-            'http://www.flickr.com/photos/potatojunkie/4518379530/' => true,
-            'http://www.flickr.com/' => false,
-            'http://www.youtube.com/' => false
+            'http://www.slideshare.net/samyong/rapid-api-development-with-packfire-framework' => true,
+            'http://slideshare.net/lachlanhardy/github-for-javascripters' => true,
+            'http://www.slideshare.net/jasonjnoble/git101' => true,
+            'http://www.slideshare.net/haraldf/business-quotes-for-2011' => true,
+            'https://speakerdeck.com/u/edds/p/what-the-flash-photography-introduction' => false,
+            'http://www.youtube.com/really?LBTdJHkAr5A' => false,
+            'http://example.com' => false
         );
         
         foreach($urls as $url => $result){
@@ -51,13 +53,13 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::fetch
      */
     public function testProviderFetch(){
-        $this->object->set('http://www.flickr.com/photos/potatojunkie/4518379530/');
+        $this->object->set('https://www.slideshare.net/samyong/rapid-api-development-with-packfire-framework');
         $this->object->peek();
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
-        $this->assertEquals('Flickr', $data['provider_name']);
+        $this->assertEquals('SlideShare', $data['provider_name']);
         $this->assertEquals('1.0', $data['version']);
-        $this->assertEquals('photo', $data['type']);
+        $this->assertEquals('rich', $data['type']);
     }
 
 }

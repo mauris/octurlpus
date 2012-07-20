@@ -12,7 +12,7 @@ use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
  * @author Sam-Mauris Yong / mauris@hotmail.sg
  * @copyright Copyright (c) 2010-2012, Sam-Mauris Yong
  * @license http://www.opensource.org/licenses/bsd-license New BSD License
- * @package Packfire\Octurlpus\Drivers\Viddler
+ * @package Packfire\Octurlpus\Drivers\Vimeo
  * @since 1.0
  */
 class Provider extends OcturlpusProvider {
@@ -24,8 +24,9 @@ class Provider extends OcturlpusProvider {
      * @since 1.0
      */
     protected function match($url){
-        return preg_match('`^https*://(www\.)*vimeo\.com/\S+$`is', $url)
-                || preg_match('`^https*://(www\.)*vimeo\.com/groups/\S+/videos/\S+$`is', $url);
+        return preg_match('`^https*://(www\.)*vimeo\.com/[0-9]+$`is', $url)
+                || preg_match('`^https*://(www\.)*vimeo\.com/\S+/\S+$`is', $url)
+                || preg_match('`^https*://(www\.)*vimeo\.com/groups/\S+/videos/[0-9]+$`is', $url);
     }
     
     /**

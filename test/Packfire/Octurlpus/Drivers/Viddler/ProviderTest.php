@@ -33,19 +33,27 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::peek
      */
     public function testProviderPeek(){
-        $this->assertTrue($this->object->peek('http://www.viddler.com/v/1646c55'));
-        $this->assertTrue($this->object->peek('http://www.viddler.com/explore/cdevroe/videos/424/'));
-        $this->assertTrue($this->object->peek('http://viddler.com/v/1646c55'));
-        $this->assertTrue($this->object->peek('http://viddler.com/explore/cdevroe/videos/424/'));
-        $this->assertFalse($this->object->peek('http://viddier.com/really?LBTdJHkAr5A'));
-        $this->assertFalse($this->object->peek('http://www.youtube.com/'));
+        $urls = array(
+            'http://www.viddler.com/v/1646c55' => true,
+            'http://www.viddler.com/explore/cdevroe/videos/424/' => true,
+            'http://viddler.com/v/1646c55' => true,
+            'http://viddler.com/explore/cdevroe/videos/424/' => true,
+            'http://viddier.com/really?LBTdJHkAr5A' => false,
+            'http://www.youtube.com/' => false
+        );
+        
+        foreach($urls as $url => $result){
+            $this->object->set($url);
+            $this->assertEquals($result, $this->object->peek());
+        }
     }
     
     /**
-     * @covers Provider::peek
+     * @covers Provider::fetch
      */
     public function testProviderFetch(){
-        $this->object->peek('http://www.viddler.com/v/1646c55');
+        $this->object->set('http://www.viddler.com/v/1646c55');
+        $this->object->peek();
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
         $this->assertEquals('Viddler', $data['provider_name']);

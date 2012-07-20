@@ -24,7 +24,7 @@ class Provider extends OcturlpusProvider {
      * @since 1.0
      */
     protected function match($url){
-        return (bool)preg_match('`^https*://([\S]+\.)*viddler\.com/\S+$`is', $url);
+        return (bool)preg_match('`^https*://(www\.)*viddler\.com/\S+$`is', $url);
     }
     
     /**

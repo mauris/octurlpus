@@ -33,18 +33,27 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::peek
      */
     public function testProviderPeek(){
-        $this->assertTrue($this->object->peek('https://speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework'));
-        $this->assertTrue($this->object->peek('https://www.speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework'));
-        $this->assertTrue($this->object->peek('https://speakerdeck.com/u/edds/p/what-the-flash-photography-introduction'));
-        $this->assertFalse($this->object->peek('http://www.youtube.com/really?LBTdJHkAr5A'));
-        $this->assertFalse($this->object->peek('http://example.com'));
+        $urls = array(
+            'https://speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework' => true,
+            'http://speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework' => true,
+            'https://www.speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework' => true,
+            'https://speakerdeck.com/u/edds/p/what-the-flash-photography-introduction' => true,
+            'http://www.youtube.com/really?LBTdJHkAr5A' => false,
+            'http://example.com' => false
+        );
+        
+        foreach($urls as $url => $result){
+            $this->object->set($url);
+            $this->assertEquals($result, $this->object->peek());
+        }
     }
     
     /**
-     * @covers Provider::peek
+     * @covers Provider::fetch
      */
     public function testProviderFetch(){
-        $this->object->peek('https://speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework');
+        $this->object->set('https://speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework');
+        $this->object->peek();
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
         $this->assertEquals('Speaker Deck', $data['provider_name']);

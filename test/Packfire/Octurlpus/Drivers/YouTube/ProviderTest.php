@@ -33,17 +33,26 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::peek
      */
     public function testProviderPeek(){
-        $this->assertTrue($this->object->peek('http://www.youtube.com/watch?feature=test&v=LBTdJHkAr5A'));
-        $this->assertTrue($this->object->peek('http://www.youtu.be/LBTdJHkAr5A'));
-        $this->assertFalse($this->object->peek('http://www.youtube.com/really?LBTdJHkAr5A'));
-        $this->assertFalse($this->object->peek('http://www.youtube.com/watch?feature=test&a=LBTdJHkAr5A'));
+        $urls = array(
+            'http://www.youtube.com/watch?v=1S6oEDZ66rU&feature=autoplay&list=PL142BA7DCA89DBFB2&playnext=1' => true,
+            'http://www.youtube.com/watch?feature=test&v=LBTdJHkAr5A' => true,
+            'http://www.youtu.be/LBTdJHkAr5A' => true,
+            'http://www.youtube.com/really?LBTdJHkAr5A' => false,
+            'http://www.youtube.com/watch?feature=test&a=LBTdJHkAr5A' => false
+        );
+        
+        foreach($urls as $url => $result){
+            $this->object->set($url);
+            $this->assertEquals($result, $this->object->peek());
+        }
     }
     
     /**
-     * @covers Provider::peek
+     * @covers Provider::fetch
      */
     public function testProviderFetch(){
-        $this->object->peek('http://www.youtube.com/watch?feature=test&v=LBTdJHkAr5A');
+        $this->object->set('http://www.youtube.com/watch?feature=test&v=LBTdJHkAr5A');
+        $this->object->peek();
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
         $this->assertEquals('YouTube', $data['provider_name']);

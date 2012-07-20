@@ -33,18 +33,26 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::peek
      */
     public function testProviderPeek(){
-        $this->assertTrue($this->object->peek('http://en.blog.wordpress.com/2012/07/12/around-the-carousel-again/'));
-        $this->assertTrue($this->object->peek('http://en.blog.wordpress.com/2012/06/21/with-wordads-my-nintendo-news-turns-hobby-into-budding-business/'));
-        $this->assertTrue($this->object->peek('http://findinggenuinejoy.wordpress.com/2012/07/10/next-stop-the-olympics/'));
-        $this->assertFalse($this->object->peek('http://wordpress.com'));
-        $this->assertFalse($this->object->peek('http://www.wordpress.com/'));
+        $urls = array(
+            'http://en.blog.wordpress.com/2012/07/12/around-the-carousel-again/' => true,
+            'http://en.blog.wordpress.com/2012/06/21/with-wordads-my-nintendo-news-turns-hobby-into-budding-business/' => true,
+            'http://findinggenuinejoy.wordpress.com/2012/07/10/next-stop-the-olympics/' => true,
+            'http://wordpress.com' => false,
+            'http://www.wordpress.com/' => false
+        );
+        
+        foreach($urls as $url => $result){
+            $this->object->set($url);
+            $this->assertEquals($result, $this->object->peek());
+        }
     }
     
     /**
-     * @covers Provider::peek
+     * @covers Provider::fetch
      */
     public function testProviderFetch(){
-        $this->object->peek('http://en.blog.wordpress.com/2012/07/12/around-the-carousel-again/');
+        $this->object->set('http://en.blog.wordpress.com/2012/07/12/around-the-carousel-again/');
+        $this->object->peek();
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
         $this->assertEquals('WordPress.com News', $data['provider_name']);

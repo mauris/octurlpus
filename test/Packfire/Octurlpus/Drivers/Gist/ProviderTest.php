@@ -1,6 +1,6 @@
 <?php
 
-namespace Packfire\Octurlpus\Drivers\Flickr;
+namespace Packfire\Octurlpus\Drivers\Gist;
 
 /**
  * Test class for Provider.
@@ -9,7 +9,7 @@ namespace Packfire\Octurlpus\Drivers\Flickr;
 class ProviderTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @var Packfire\Octurlpus\Drivers\Flickr\Provider
+     * @var Packfire\Octurlpus\Drivers\Gist\Provider
      */
     protected $object;
 
@@ -34,11 +34,12 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      */
     public function testProviderPeek(){
         $urls = array(
-            'http://flickr.com/photos/bees/2362225867/' => true,
-            'http://www.flickr.com/photos/bees/2362225867/' => true,
-            'http://www.flickr.com/photos/potatojunkie/4518379530/' => true,
-            'http://www.flickr.com/' => false,
-            'http://www.youtube.com/' => false
+            'https://gist.github.com/3150021' => true,
+            'http://gist.github.com/3150021' => true,
+            'https://gist.github.com/3150056' => true,
+            'http://gist.github.com/3150056/afa3d493fef02289a108e593ccceac30d546aaee' => true,
+            'http://viddier.com/really?LBTdJHkAr5A' => false,
+            'http://www.google.com/' => false
         );
         
         foreach($urls as $url => $result){
@@ -51,13 +52,13 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::fetch
      */
     public function testProviderFetch(){
-        $this->object->set('http://www.flickr.com/photos/potatojunkie/4518379530/');
+        $this->object->set('https://gist.github.com/3150056/afa3d493fef02289a108e593ccceac30d546aaee');
         $this->object->peek();
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
-        $this->assertEquals('Flickr', $data['provider_name']);
+        $this->assertEquals('Github Gist', $data['provider_name']);
         $this->assertEquals('1.0', $data['version']);
-        $this->assertEquals('photo', $data['type']);
+        $this->assertEquals('link', $data['type']);
     }
 
 }
