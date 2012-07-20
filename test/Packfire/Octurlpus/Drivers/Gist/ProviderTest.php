@@ -1,6 +1,6 @@
 <?php
 
-namespace Packfire\Octurlpus\Drivers\Flickr;
+namespace Packfire\Octurlpus\Drivers\Vimeo;
 
 /**
  * Test class for Provider.
@@ -9,7 +9,7 @@ namespace Packfire\Octurlpus\Drivers\Flickr;
 class ProviderTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @var Packfire\Octurlpus\Drivers\Flickr\Provider
+     * @var Packfire\Octurlpus\Drivers\Vimeo\Provider
      */
     protected $object;
 
@@ -33,31 +33,24 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::peek
      */
     public function testProviderPeek(){
-        $urls = array(
-            'http://flickr.com/photos/bees/2362225867/' => true,
-            'http://www.flickr.com/photos/bees/2362225867/' => true,
-            'http://www.flickr.com/photos/potatojunkie/4518379530/' => true,
-            'http://www.flickr.com/' => false,
-            'http://www.youtube.com/' => false
-        );
-        
-        foreach($urls as $url => $result){
-            $this->object->set($url);
-            $this->assertEquals($result, $this->object->peek());
-        }
+        $this->assertTrue($this->object->peek('http://www.vimeo.com/7100569'));
+        $this->assertTrue($this->object->peek('http://vimeo.com/7100569'));
+        $this->assertTrue($this->object->peek('https://vimeo.com/samyong/packfire-linux-install'));
+        $this->assertTrue($this->object->peek('https://vimeo.com/groups/magiclantern/videos/43218777'));
+        $this->assertFalse($this->object->peek('http://viddier.com/really?LBTdJHkAr5A'));
+        $this->assertFalse($this->object->peek('http://www.google.com/'));
     }
     
     /**
-     * @covers Provider::fetch
+     * @covers Provider::peek
      */
     public function testProviderFetch(){
-        $this->object->set('http://www.flickr.com/photos/potatojunkie/4518379530/');
-        $this->object->peek();
+        $this->object->peek('https://vimeo.com/groups/magiclantern/videos/43218777');
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
-        $this->assertEquals('Flickr', $data['provider_name']);
+        $this->assertEquals('Vimeo', $data['provider_name']);
         $this->assertEquals('1.0', $data['version']);
-        $this->assertEquals('photo', $data['type']);
+        $this->assertEquals('video', $data['type']);
     }
 
 }

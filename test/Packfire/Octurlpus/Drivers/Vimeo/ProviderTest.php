@@ -33,19 +33,27 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::peek
      */
     public function testProviderPeek(){
-        $this->assertTrue($this->object->peek('http://www.vimeo.com/7100569'));
-        $this->assertTrue($this->object->peek('http://vimeo.com/7100569'));
-        $this->assertTrue($this->object->peek('https://vimeo.com/samyong/packfire-linux-install'));
-        $this->assertTrue($this->object->peek('https://vimeo.com/groups/magiclantern/videos/43218777'));
-        $this->assertFalse($this->object->peek('http://viddier.com/really?LBTdJHkAr5A'));
-        $this->assertFalse($this->object->peek('http://www.google.com/'));
+        $urls = array(
+            'http://www.vimeo.com/7100569' => true,
+            'http://vimeo.com/7100569' => true,
+            'https://vimeo.com/samyong/packfire-linux-install' => true,
+            'https://vimeo.com/groups/magiclantern/videos/43218777' => true,
+            'http://vimeo.com/LBTdJHkAr5A' => false,
+            'http://www.google.com/' => false
+        );
+        
+        foreach($urls as $url => $result){
+            $this->object->set($url);
+            $this->assertEquals($result, $this->object->peek());
+        }
     }
     
     /**
-     * @covers Provider::peek
+     * @covers Provider::fetch
      */
     public function testProviderFetch(){
-        $this->object->peek('https://vimeo.com/groups/magiclantern/videos/43218777');
+        $this->object->set('https://vimeo.com/groups/magiclantern/videos/43218777');
+        $this->object->peek();
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
         $this->assertEquals('Vimeo', $data['provider_name']);
