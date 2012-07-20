@@ -16,19 +16,6 @@ namespace Packfire\Octurlpus;
 class Octurlpus {
     
     /**
-     * Service providers
-     * @var array
-     * @since 1.0
-     */
-    private $providers = array(
-        'YouTube',
-        'Viddler',
-        'WordPress',
-        'SpeakerDeck',
-        'Vimeo'
-    );
-    
-    /**
      * Create a new Octurlpus instance
      * @since 1.0
      */
@@ -42,9 +29,13 @@ class Octurlpus {
      */
     private function loadProviders(){
         $providers = array();
-        foreach($this->providers as $provider){
-            $name = 'Packfire\\Octurlpus\\Drivers\\' . $provider . '\\Provider';
-            $providers[$provider] = new $name();
+        $drivers = glob('Packfire/Octurlpus/Drivers/*', GLOB_ONLYDIR);
+        if($drivers){
+            foreach($drivers as $provider){
+                $provider = basename($provider);
+                $name = 'Packfire\\Octurlpus\\Drivers\\' . $provider . '\\Provider';
+                $providers[$provider] = new $name();
+            }
         }
         $this->providers = $providers;
     }
