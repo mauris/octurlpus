@@ -1,6 +1,6 @@
 <?php
 
-namespace Packfire\Octurlpus\Drivers\Vimeo;
+namespace Packfire\Octurlpus\Drivers\Gist;
 
 /**
  * Test class for Provider.
@@ -9,7 +9,7 @@ namespace Packfire\Octurlpus\Drivers\Vimeo;
 class ProviderTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @var Packfire\Octurlpus\Drivers\Vimeo\Provider
+     * @var Packfire\Octurlpus\Drivers\Gist\Provider
      */
     protected $object;
 
@@ -33,24 +33,32 @@ class ProviderTest extends \PHPUnit_Framework_TestCase {
      * @covers Provider::peek
      */
     public function testProviderPeek(){
-        $this->assertTrue($this->object->peek('http://www.vimeo.com/7100569'));
-        $this->assertTrue($this->object->peek('http://vimeo.com/7100569'));
-        $this->assertTrue($this->object->peek('https://vimeo.com/samyong/packfire-linux-install'));
-        $this->assertTrue($this->object->peek('https://vimeo.com/groups/magiclantern/videos/43218777'));
-        $this->assertFalse($this->object->peek('http://viddier.com/really?LBTdJHkAr5A'));
-        $this->assertFalse($this->object->peek('http://www.google.com/'));
+        $urls = array(
+            'https://gist.github.com/3150021' => true,
+            'http://gist.github.com/3150021' => true,
+            'https://gist.github.com/3150056' => true,
+            'http://gist.github.com/3150056/afa3d493fef02289a108e593ccceac30d546aaee' => true,
+            'http://viddier.com/really?LBTdJHkAr5A' => false,
+            'http://www.google.com/' => false
+        );
+        
+        foreach($urls as $url => $result){
+            $this->object->set($url);
+            $this->assertEquals($result, $this->object->peek());
+        }
     }
     
     /**
-     * @covers Provider::peek
+     * @covers Provider::fetch
      */
     public function testProviderFetch(){
-        $this->object->peek('https://vimeo.com/groups/magiclantern/videos/43218777');
+        $this->object->set('https://gist.github.com/3150056/afa3d493fef02289a108e593ccceac30d546aaee');
+        $this->object->peek();
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);
-        $this->assertEquals('Vimeo', $data['provider_name']);
+        $this->assertEquals('Github Gist', $data['provider_name']);
         $this->assertEquals('1.0', $data['version']);
-        $this->assertEquals('video', $data['type']);
+        $this->assertEquals('link', $data['type']);
     }
 
 }
