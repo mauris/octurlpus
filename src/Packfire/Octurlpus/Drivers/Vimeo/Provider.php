@@ -17,12 +17,22 @@ use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
  */
 class Provider extends OcturlpusProvider {
     
-    
+    /**
+     * Check if the URL matches the oEmbed provider's pattern
+     * @param string $url The URL to check
+     * @return boolean Returns true if the pattern matches, false otherwise.
+     * @since 1.0
+     */
     protected function match($url){
         return preg_match('`^https*://(www\.)*vimeo\.com/\S+$`is', $url)
                 || preg_match('`^https*://(www\.)*vimeo\.com/groups/\S+/videos/\S+$`is', $url);
     }
     
+    /**
+     * Get the oEmbed provider endpoint
+     * @return string Returns the endpoint URL
+     * @since 1.0
+     */
     protected function oembed(){
         return 'http://vimeo.com/api/oembed.json';
     }
