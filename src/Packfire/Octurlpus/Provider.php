@@ -2,6 +2,8 @@
 
 namespace Packfire\Octurlpus;
 
+use Packfire\Octurlpus\IProvider;
+
 /**
  * Driver class
  * 
@@ -13,7 +15,7 @@ namespace Packfire\Octurlpus;
  * @package Packfire\Octurlpus
  * @since 1.0
  */
-abstract class Provider {
+abstract class Provider implements IProvider {
     
     /**
      * The current working URL
@@ -22,24 +24,13 @@ abstract class Provider {
      */
     protected $url;
     
+    /**
+     * Set the current working URL
+     * @param string $url The URL to set as the current working URL
+     * @since 1.0
+     */
     public function set($url){
         $this->url = $url;
     }
-    
-    /**
-     * Peek into the URL to see if the Provider can handle this URL.\
-     * 
-     * @return boolean Returns true if the Provider can handle and fetch data
-     *          for the URL, and false otherwise.
-     * @since 1.0
-     */
-    public abstract function peek();
-    
-    /**
-     * Fetch data from the current working URL
-     * @return array Returns the array containing the data
-     * @since 1.0
-     */
-    public abstract function fetch();
     
 }
