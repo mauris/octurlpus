@@ -32,6 +32,16 @@ You will be able to get the data about the YouTube video as:
       "type":"video",
       "thumbnail_height":360
     }
+    
+With the data, you can easily integrate videos, links, embeds, photos into your application. 
+    
+##oEmbed
+
+oEmbed is a open embedding standard that allows consumers to get data about a URL and to integrate these data seamlessly into their applications.
+
+Some of the providers in Octurlpus use oEmbed to retrieve the data from the providers' services by implementing the standard.
+
+Learn more about oEmbed at: http://oembed.com/
 
 ##License
 
