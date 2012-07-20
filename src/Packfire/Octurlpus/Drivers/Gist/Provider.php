@@ -7,7 +7,7 @@ use Packfire\Octurlpus\Provider as OcturlpusProvider;
 /**
  * Provider class
  * 
- * Providing Driver for Viddler URLs
+ * Providing Driver for Github Gist URLs
  *
  * @author Sam-Mauris Yong / mauris@hotmail.sg
  * @copyright Copyright (c) 2010-2012, Sam-Mauris Yong
@@ -60,7 +60,7 @@ class Provider extends OcturlpusProvider {
      * @since 1.0
      */
     public function fetch(){
-        $result = array(
+        return array(
             'provider_name' => 'Github Gist',
             'provider_url' => 'https://gist.github.com/',
             'type' => 'link',
@@ -70,7 +70,6 @@ class Provider extends OcturlpusProvider {
                         . ($this->secure ? 's' : '') . '://gist.github.com/'
                         . $this->id . '.js"></script>'
         );
-        return $result;
     }
     
 }
