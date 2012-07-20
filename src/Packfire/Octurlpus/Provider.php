@@ -15,8 +15,31 @@ namespace Packfire\Octurlpus;
  */
 abstract class Provider {
     
-    public abstract function peek($url);
+    /**
+     * The current working URL
+     * @var string
+     * @since 1.0
+     */
+    protected $url;
     
+    public function set($url){
+        $this->url = $url;
+    }
+    
+    /**
+     * Peek into the URL to see if the Provider can handle this URL.\
+     * 
+     * @return boolean Returns true if the Provider can handle and fetch data
+     *          for the URL, and false otherwise.
+     * @since 1.0
+     */
+    public abstract function peek();
+    
+    /**
+     * Fetch data from the current working URL
+     * @return array Returns the array containing the data
+     * @since 1.0
+     */
     public abstract function fetch();
     
 }

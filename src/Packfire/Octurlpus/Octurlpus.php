@@ -59,7 +59,8 @@ class Octurlpus {
     public function type($url){
         foreach($this->providers as $name => $provider){
             /* @var Packfire\Octurlpus\Provider $provider */
-            if($provider->peek($url)){
+            $provider->set($url);
+            if($provider->peek()){
                 return $name;
             }
         }
@@ -75,7 +76,8 @@ class Octurlpus {
     public function request($url){
         foreach($this->providers as $provider){
             /* @var Packfire\Octurlpus\Provider $provider */
-            if($provider->peek($url)){
+            $provider->set($url);
+            if($provider->peek()){
                 return $provider->fetch();
             }
         }
