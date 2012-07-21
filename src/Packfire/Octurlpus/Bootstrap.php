@@ -20,8 +20,8 @@ class Bootstrap {
      * @since 1.0
      */
     public static function initialize(){
-        set_include_path(get_include_path() . PATH_SEPARATOR
-                . dirname(dirname(__DIR__)));
+        set_include_path(dirname(dirname(__DIR__))
+                . PATH_SEPARATOR . get_include_path());
         spl_autoload_register(function($class) {
             $class = ltrim($class, '\\');
             $fileName  = '';
