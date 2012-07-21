@@ -5,5 +5,5 @@
  */
 use Packfire\Octurlpus\Bootstrap;
 
-include(dirname(__FILE__).'/../src/Packfire/Octurlpus/Bootstrap.php');
+include(__DIR__ . '/../src/Packfire/Octurlpus/Bootstrap.php');
 Bootstrap::initialize();

@@ -29,7 +29,7 @@ class Octurlpus {
      */
     private function loadProviders(){
         $providers = array();
-        $drivers = glob('Packfire/Octurlpus/Drivers/*', GLOB_ONLYDIR);
+        $drivers = glob(__DIR__ . '/Drivers/*', GLOB_ONLYDIR | GLOB_NOSORT);
         if($drivers){
             foreach($drivers as $provider){
                 $provider = basename($provider);

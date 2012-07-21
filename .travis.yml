@@ -3,6 +3,4 @@ php:
   - 5.3
   - 5.3.3
   - 5.4
-before_script:
-  - cd ./test
-script: phpunit --bootstrap bootstrap.php -c configuration.xml .
+script: phpunit -c phpunit.dist.xml test/
