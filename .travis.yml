@@ -4,5 +4,6 @@ php:
   - 5.3.3
   - 5.4
 before_script:
-  - cd test
-script: phpunit -c ../phpunit.dist.xml
+  - wget http://getcomposer.org/composer.phar
+  - php composer.phar install --dev
+script: phpunit -c phpunit.dist.xml --bootstrap test/loader.php
