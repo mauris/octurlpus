@@ -2,7 +2,7 @@
 
 Making URLs meaningful to code
 
-[![Build Status](https://secure.travis-ci.org/thephpdeveloper/octurlpus.png?branch=master)](http://travis-ci.org/thephpdeveloper/octurlpus)
+[![Build Status](https://secure.travis-ci.org/mauris/octurlpus.png?branch=master)](http://travis-ci.org/mauris/octurlpus)
 
 ##Intro
 
