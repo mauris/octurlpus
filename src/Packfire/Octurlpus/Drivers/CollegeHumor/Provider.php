@@ -6,7 +6,7 @@ use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
 
 /**
  * Provider class
- * 
+ *
  * Providing Driver for CollegeHumor URLs
  *
  * @author Sam-Mauris Yong / mauris@hotmail.sg
@@ -15,14 +15,15 @@ use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
  * @package Packfire\Octurlpus\Drivers\CollegeHumor
  * @since 1.0
  */
-class Provider extends OcturlpusProvider {
-    
-    protected function match($url){
+class Provider extends OcturlpusProvider
+{
+    protected function match($url)
+    {
         return (bool)preg_match('`^http://(www\.)*collegehumor\.com/video/\S+$`is', $url);
     }
-    
-    protected function oembed(){
+
+    protected function oembed()
+    {
         return 'http://www.collegehumor.com/oembed.json';
     }
-    
 }

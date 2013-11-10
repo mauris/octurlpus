@@ -4,7 +4,7 @@ namespace Packfire\Octurlpus;
 
 /**
  * Octurlpus class
- * 
+ *
  * Main functioning class for Octurlpus functionality
  *
  * @author Sam-Mauris Yong / mauris@hotmail.sg
@@ -13,25 +13,27 @@ namespace Packfire\Octurlpus;
  * @package Packfire\Octurlpus
  * @since 1.0
  */
-class Octurlpus {
-    
+class Octurlpus
+{
     /**
      * Create a new Octurlpus instance
      * @since 1.0
      */
-    public function __construct(){
+    public function __construct()
+    {
         $this->loadProviders();
     }
-    
+
     /**
      * Load the service providers
      * @since 1.0
      */
-    private function loadProviders(){
+    private function loadProviders()
+    {
         $providers = array();
         $drivers = glob(__DIR__ . '/Drivers/*', GLOB_ONLYDIR | GLOB_NOSORT);
-        if($drivers){
-            foreach($drivers as $provider){
+        if ($drivers) {
+            foreach ($drivers as $provider) {
                 $provider = basename($provider);
                 $name = 'Packfire\\Octurlpus\\Drivers\\' . $provider . '\\Provider';
                 $providers[$provider] = new $name();
@@ -39,7 +41,7 @@ class Octurlpus {
         }
         $this->providers = $providers;
     }
-    
+
     /**
      * Get the provider name for the URL
      * @param string $url The URL to check
@@ -47,16 +49,17 @@ class Octurlpus {
      *          no suitable provider can handle the URL.
      * @since 1.0
      */
-    public function type($url){
-        foreach($this->providers as $name => $provider){
+    public function type($url)
+    {
+        foreach ($this->providers as $name => $provider) {
             /* @var Packfire\Octurlpus\Provider $provider */
             $provider->set($url);
-            if($provider->peek()){
+            if ($provider->peek()) {
                 return $name;
             }
         }
     }
-    
+
     /**
      * Request additional data about the URL
      * @param string $url The URL to retrieve more data
@@ -64,14 +67,14 @@ class Octurlpus {
      *      the URL.
      * @since 1.0
      */
-    public function request($url){
-        foreach($this->providers as $provider){
+    public function request($url)
+    {
+        foreach ($this->providers as $provider) {
             /* @var Packfire\Octurlpus\Provider $provider */
             $provider->set($url);
-            if($provider->peek()){
+            if ($provider->peek()) {
                 return $provider->fetch();
             }
         }
     }
-    
 }

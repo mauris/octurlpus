@@ -6,7 +6,7 @@ use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
 
 /**
  * Provider class
- * 
+ *
  * Providing Driver for SlideShare URLs
  *
  * @author Sam-Mauris Yong / mauris@hotmail.sg
@@ -15,14 +15,15 @@ use Packfire\Octurlpus\OEmbedProvider as OcturlpusProvider;
  * @package Packfire\Octurlpus\Drivers\SlideShare
  * @since 1.0
  */
-class Provider extends OcturlpusProvider {
-    
-    protected function match($url){
+class Provider extends OcturlpusProvider
+{
+    protected function match($url)
+    {
         return (bool)preg_match('`^https*://(www\.)*slideshare\.net/\S+/\S+$`is', $url);
     }
-    
-    protected function oembed(){
+
+    protected function oembed()
+    {
         return 'http://www.slideshare.net/api/oembed/2';
     }
-    
 }

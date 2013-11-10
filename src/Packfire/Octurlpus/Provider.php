@@ -6,7 +6,7 @@ use Packfire\Octurlpus\IProvider;
 
 /**
  * Driver class
- * 
+ *
  * Generic driver for Octurlpus URL parsing
  *
  * @author Sam-Mauris Yong / mauris@hotmail.sg
@@ -15,22 +15,22 @@ use Packfire\Octurlpus\IProvider;
  * @package Packfire\Octurlpus
  * @since 1.0
  */
-abstract class Provider implements IProvider {
-    
+abstract class Provider implements IProvider
+{
     /**
      * The current working URL
      * @var string
      * @since 1.0
      */
     protected $url;
-    
+
     /**
      * Set the current working URL
      * @param string $url The URL to set as the current working URL
      * @since 1.0
      */
-    public function set($url){
+    public function set($url)
+    {
         $this->url = $url;
     }
-    
 }
