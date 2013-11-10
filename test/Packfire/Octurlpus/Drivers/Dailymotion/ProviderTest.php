@@ -23,9 +23,6 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         $this->object = new Provider;
     }
 
-    /**
-     * @covers Provider::peek
-     */
     public function testProviderPeek()
     {
         $urls = array(

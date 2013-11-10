@@ -25,9 +25,9 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     public function testProviderPeek()
     {
         $urls = array(
-            'https://speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework' => true,
-            'http://speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework' => true,
-            'https://www.speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework' => true,
+            'https://speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework-for-php' => true,
+            'http://speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework-for-php' => true,
+            'https://www.speakerdeck.com/mauris/rapid-api-development-with-packfire-framework-for-php' => true,
             'https://speakerdeck.com/u/edds/p/what-the-flash-photography-introduction' => true,
             'http://www.youtube.com/really?LBTdJHkAr5A' => false,
             'http://example.com' => false
@@ -39,8 +39,9 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testProviderFetch(){
-        $this->object->set('https://speakerdeck.com/u/mauris/p/rapid-api-development-with-packfire-framework');
+    public function testProviderFetch()
+    {
+        $this->object->set('https://speakerdeck.com/mauris/rapid-api-development-with-packfire-framework-for-php');
         $this->object->peek();
         $data = $this->object->fetch();
         $this->assertNotEmpty($data);

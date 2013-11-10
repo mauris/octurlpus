@@ -40,9 +40,6 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @covers Provider::fetch
-     */
     public function testProviderFetch()
     {
         $this->object->set('http://www.collegehumor.com/video/6778520/the-fall-of-pinterest');

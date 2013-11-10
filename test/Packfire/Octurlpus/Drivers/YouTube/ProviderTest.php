@@ -38,9 +38,6 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @covers Provider::fetch
-     */
     public function testProviderFetch()
     {
         $this->object->set('http://www.youtube.com/watch?feature=test&v=LBTdJHkAr5A');

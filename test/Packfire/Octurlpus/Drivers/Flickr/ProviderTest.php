@@ -38,9 +38,6 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @covers Provider::fetch
-     */
     public function testProviderFetch()
     {
         $this->object->set('http://www.flickr.com/photos/potatojunkie/4518379530/');
