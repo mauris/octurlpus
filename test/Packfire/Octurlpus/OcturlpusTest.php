@@ -40,4 +40,10 @@ class OcturlpusTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('1.0', $data['version']);
         $this->assertEquals('video', $data['type']);
     }
+
+    public function testRequestNull()
+    {
+        $data = $this->object->request('http://google.com');
+        $this->assertNull($data);
+    }
 }

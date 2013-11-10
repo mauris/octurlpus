@@ -28,7 +28,8 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
             'http://www.youtube.com/watch?v=1S6oEDZ66rU&feature=autoplay&list=PL142BA7DCA89DBFB2&playnext=1' => true,
             'http://www.youtube.com/watch?feature=test&v=LBTdJHkAr5A' => true,
             'http://www.youtu.be/LBTdJHkAr5A' => true,
-            'http://www.youtube.com/really?LBTdJHkAr5A' => false,
+            'http://youtu.be/LBTdJHkAr5A' => true,
+            'http://vimeo.com/really?LBTdJHkAr5A' => false,
             'http://www.youtube.com/watch?feature=test&a=LBTdJHkAr5A' => false
         );
 
